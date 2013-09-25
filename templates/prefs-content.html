@@ -1,0 +1,15 @@
+<div class="pv-breadcrumbs">{{#breadcrumbs}}<div style="padding-left:{{padLeft}}px"><a data-index="{{crumbIndex}}">{{crumbText}}</a></div>{{/breadcrumbs}}</div>
+<div class="pv-keylist">
+    <table>
+        <tr>
+            <td class="pv-key">Key</td>
+            <td class="pv-value">Value</td>
+        </tr>
+        {{#keyValueList}}
+        <tr>
+            <td class="pv-key"><a data-key="{{key}}">{{key}}</a></td>
+            <td class="pv-value">{{value}}</td>
+        </tr>
+        {{/keyValueList}}
+    </table>
+</div>
