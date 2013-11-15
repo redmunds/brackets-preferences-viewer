@@ -35,6 +35,10 @@
     padding: 4px 10px;
 }
 
+#prefs-viewer .pv-keylist tr:first-child td {
+    font-weight: bold;
+}
+
 #prefs-viewer .toolbar {
     display: block;
 }

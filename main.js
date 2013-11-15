@@ -34,6 +34,7 @@ define(function (require, exports, module) {
         ExtensionUtils      = brackets.getModule("utils/ExtensionUtils"),
         KeyBindingManager   = brackets.getModule("command/KeyBindingManager"),
         Menus               = brackets.getModule("command/Menus"),
+        PanelManager        = brackets.getModule("view/PanelManager"),
         PreferencesManager  = brackets.getModule("preferences/PreferencesManager"),
         Resizer             = brackets.getModule("utils/Resizer");
 
@@ -236,9 +237,11 @@ define(function (require, exports, module) {
     }
 
     function init() {
-        var prefs     = PreferencesManager.getPreferenceStorage(module, defaultPrefs),
+        var s         = Mustache.render(prefsViewerHtml),
+            prefs     = PreferencesManager.getPreferenceStorage(module, defaultPrefs),
             height    = prefs.getValue("height"),
-            view_menu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU);
+            view_menu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU),
+            panel;
 
         clearData();
 
@@ -253,7 +256,7 @@ define(function (require, exports, module) {
         }
 
         // setup panel
-        $(".content").append(Mustache.render(prefsViewerHtml));
+        panel = PanelManager.createBottomPanel(TOGGLE_VIEWER_ID, $(s), 100);
 
         $prefsViewerPanel = $("#prefs-viewer");
         $prefsViewerContent = $prefsViewerPanel.find(".resizable-content");
@@ -269,10 +272,6 @@ define(function (require, exports, module) {
         $prefsViewerPanel.on("panelResizeEnd", function (event, height) {
             prefs.setValue("height", height);
         });
-
-        // AppInit.htmlReady() has already executed before extensions are loaded
-        // so, for now, we need to call this ourself
-        Resizer.makeResizable($prefsViewerPanel.get(0), "vert", "top", 100);
     }
 
     init();
