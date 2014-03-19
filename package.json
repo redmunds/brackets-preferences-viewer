@@ -1,13 +1,13 @@
 {
     "name": "brackets-preferences-viewer",
-    "title": "Preferences Viewer",
-    "version": "1.0.3",
-    "description": "Obsolete for 0.37.0 and greater. Tool for navigating and viewing Preferences.",
+    "title": "Local Storage Viewer",
+    "version": "1.0.4",
+    "description": "Tool for navigating and viewing Local Storage.",
     "homepage": "https://github.com/redmunds/brackets-preferences-viewer",
     "author": "Randy Edmunds (https://github.com/redmunds)",
     "license": "MIT",
     "categories": "utility",
     "engines": {
-        "brackets": "<0.37.0"
+        "brackets": ">=0.37.0"
     }
 }
