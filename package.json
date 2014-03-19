@@ -1,7 +1,7 @@
 {
     "name": "brackets-preferences-viewer",
     "title": "Preferences Viewer",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Tool for navigating and viewing Preferences.",
     "homepage": "https://github.com/redmunds/brackets-preferences-viewer",
     "author": "Randy Edmunds (https://github.com/redmunds)",
