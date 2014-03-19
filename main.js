@@ -248,7 +248,7 @@ define(function (require, exports, module) {
         ExtensionUtils.loadStyleSheet(module, "viewer.css");
 
         // Register function as command
-        CommandManager.register("Show Preferences Viewer", TOGGLE_VIEWER_ID, handleShowHidePrefsViewer);
+        CommandManager.register("Show Local Storage Viewer", TOGGLE_VIEWER_ID, handleShowHidePrefsViewer);
 
         // Add command to View menu, if it exists
         if (view_menu) {
