@@ -35,14 +35,12 @@ define(function (require, exports, module) {
         KeyBindingManager   = brackets.getModule("command/KeyBindingManager"),
         Menus               = brackets.getModule("command/Menus"),
         PanelManager        = brackets.getModule("view/PanelManager"),
-        PreferencesManager  = brackets.getModule("preferences/PreferencesManager"),
         Resizer             = brackets.getModule("utils/Resizer");
 
     var prefsViewerHtml     = require("text!templates/prefs-viewer.html"),
         prefsContentHtml    = require("text!templates/prefs-content.html"),
         TOGGLE_VIEWER_ID    = "redmunds.prefs-viewer.view.prefs-viewer",
         HEADER_HEIGHT       = 27,
-        defaultPrefs        = { height: 200 },
         templateData,
         baseObj,
         navState;
@@ -238,8 +236,6 @@ define(function (require, exports, module) {
 
     function init() {
         var s         = Mustache.render(prefsViewerHtml),
-            prefs     = PreferencesManager.getPreferenceStorage(module, defaultPrefs),
-            height    = prefs.getValue("height"),
             view_menu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU),
             panel;
 
@@ -264,13 +260,6 @@ define(function (require, exports, module) {
 
         $prefsViewerPanel.find(".pv-close").click(function () {
             CommandManager.execute(TOGGLE_VIEWER_ID);
-        });
-
-        $prefsViewerPanel.height(height);
-        $prefsViewerContent.height(height - HEADER_HEIGHT);
-        
-        $prefsViewerPanel.on("panelResizeEnd", function (event, height) {
-            prefs.setValue("height", height);
         });
     }
 
