@@ -23,7 +23,7 @@
 
 
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
-/*global window, define, brackets, $, Mustache, bindEvents */
+/*global window, define, brackets, $, Mustache */
 
 define(function (require, exports, module) {
     "use strict";
@@ -32,18 +32,16 @@ define(function (require, exports, module) {
     var CommandManager      = brackets.getModule("command/CommandManager"),
         EditorManager       = brackets.getModule("editor/EditorManager"),
         ExtensionUtils      = brackets.getModule("utils/ExtensionUtils"),
-        KeyBindingManager   = brackets.getModule("command/KeyBindingManager"),
         Menus               = brackets.getModule("command/Menus"),
-        PanelManager        = brackets.getModule("view/PanelManager"),
-        Resizer             = brackets.getModule("utils/Resizer");
+        PanelManager        = brackets.getModule("view/PanelManager");
 
     var prefsViewerHtml     = require("text!templates/prefs-viewer.html"),
         prefsContentHtml    = require("text!templates/prefs-content.html"),
         TOGGLE_VIEWER_ID    = "redmunds.prefs-viewer.view.prefs-viewer",
-        HEADER_HEIGHT       = 27,
         templateData,
         baseObj,
-        navState;
+        navState,
+        bindEvents;     // forward declaration
 
     var $prefsViewerPanel,
         $prefsViewerContent;
@@ -63,7 +61,6 @@ define(function (require, exports, module) {
             padLeft = 0,
             key,
             obj = (navState.length > 0) ? navState[navState.length - 1].obj : {},
-            size,
             val;
 
         // start with fresh template data
@@ -90,8 +87,6 @@ define(function (require, exports, module) {
                 val = obj[i];
                 if (typeof val === "object") {
                     val = "[Object]";
-                } else if (typeof val  === "array") {
-                    val = "[Array]";
                 }
 
                 templateData.keyValueList.push({
@@ -183,7 +178,7 @@ define(function (require, exports, module) {
             newObj = curObj[event.target.dataset.key];
 
         // only push object or array onto stack
-        if (typeof newObj !== "object" && typeof newObj  !== "array") {
+        if (typeof newObj !== "object") {
             return;
         }
 
@@ -200,7 +195,7 @@ define(function (require, exports, module) {
         bindEvents();
     }
     
-    function bindEvents() {
+    bindEvents = function () {
         var $breadcrumbs = $prefsViewerContent.find(".pv-breadcrumbs a"),
             $keys        = $prefsViewerContent.find(".pv-key a");
 
@@ -219,7 +214,7 @@ define(function (require, exports, module) {
         $keys.on("click", function (event) {
             clickKey(event);
         });
-    }
+    };
 
     function handleShowHidePrefsViewer() {
         if ($prefsViewerPanel.css("display") === "none") {
