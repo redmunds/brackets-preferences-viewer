@@ -1,7 +1,7 @@
 {
     "name": "brackets-preferences-viewer",
     "title": "Local Storage Viewer",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Tool for navigating and viewing Local Storage.",
     "homepage": "https://github.com/redmunds/brackets-preferences-viewer",
     "author": "Randy Edmunds (https://github.com/redmunds)",
